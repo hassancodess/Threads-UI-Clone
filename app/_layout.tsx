@@ -1,10 +1,12 @@
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import { DarkTheme, DefaultTheme, ThemeProvider } from "@react-navigation/native";
+import { DarkTheme, DefaultTheme, ThemeProvider, useTheme } from "@react-navigation/native";
 import { useFonts } from "expo-font";
 import { SplashScreen, Stack } from "expo-router";
 import { useEffect } from "react";
 import { useColorScheme } from "react-native";
 import { ThreadsProvider } from "../context/ThreadContext";
+import * as NavigationBar from "expo-navigation-bar";
+import Colors from "../constants/Colors";
 
 export {
 	// Catch any errors thrown by the Layout component.
@@ -38,6 +40,9 @@ export default function RootLayout() {
 
 function RootLayoutNav() {
 	const colorScheme = useColorScheme();
+	const { colors } = useTheme();
+	const navigationBarColor = colorScheme === "dark" ? "rgb(18, 18, 18)" : colors.card;
+	NavigationBar.setBackgroundColorAsync(navigationBarColor);
 
 	return (
 		<>
